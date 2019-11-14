@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 
 import Todo from "./components/Todo";
@@ -13,9 +13,16 @@ const styles = {
 };
 
 export default function App() {
-  const [todos, setTodos] = useState([]);
+  const getTodos = () =>
+    JSON.parse(localStorage.getItem("@todos-app:todos")) || [];
 
-  function addTodo(event) {
+  const [todos, setTodos] = useState(getTodos);
+
+  useEffect(() => {
+    localStorage.setItem("@todos-app:todos", JSON.stringify(todos));
+  }, [todos]);
+
+  async function addTodo(event) {
     if (event.key === "Enter") {
       setTodos([...todos, { id: Math.random(), text: event.target.value }]);
     }
