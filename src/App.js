@@ -24,9 +24,9 @@ export default function App() {
       case "all":
         return todos;
       case "done":
-        return todos.filter(todo => todo.active !== false);
-      case "notdone":
         return todos.filter(todo => todo.active !== true);
+      case "notdone":
+        return todos.filter(todo => todo.active !== false);
       default:
         return todos;
     }
@@ -72,8 +72,8 @@ export default function App() {
         />
       ))}
       <button onClick={() => setFilter("all")}>Todos</button>
-      <button onClick={() => setFilter("done")}>Ativos</button>
-      <button onClick={() => setFilter("notdone")}>Completos</button>
+      <button onClick={() => setFilter("notdone")}>Ativos</button>
+      <button onClick={() => setFilter("done")}>Completos</button>
     </div>
   );
 }
