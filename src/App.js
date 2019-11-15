@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./style.css";
 
 import Todo from "./components/Todo";
@@ -17,6 +17,20 @@ export default function App() {
     JSON.parse(localStorage.getItem("@todos-app:todos")) || [];
 
   const [todos, setTodos] = useState(getTodos);
+  const [filter, setFilter] = useState("all");
+
+  const filteredTodos = useMemo(() => {
+    switch (filter) {
+      case "all":
+        return todos;
+      case "done":
+        return todos.filter(todo => todo.active !== false);
+      case "notdone":
+        return todos.filter(todo => todo.active !== true);
+      default:
+        return todos;
+    }
+  }, [filter, todos]);
 
   const deleteTodo = id => setTodos(todos.filter(todo => todo.id !== id));
 
@@ -49,7 +63,7 @@ export default function App() {
     <div style={styles.container}>
       <h1>Todos</h1>
       <input onKeyPress={addTodo} />
-      {todos.map(todo => (
+      {filteredTodos.map(todo => (
         <Todo
           key={todo.id}
           todo={todo}
@@ -57,6 +71,9 @@ export default function App() {
           update={() => updateTodo(todo.id)}
         />
       ))}
+      <button onClick={() => setFilter("all")}>Todos</button>
+      <button onClick={() => setFilter("done")}>Ativos</button>
+      <button onClick={() => setFilter("notdone")}>Completos</button>
     </div>
   );
 }
