@@ -20,6 +20,17 @@ export default function App() {
 
   const deleteTodo = id => setTodos(todos.filter(todo => todo.id !== id));
 
+  const updateTodo = id => {
+    setTodos(
+      todos.map(todo => {
+        if (todo.id === id) {
+          todo.active = !todo.active;
+        }
+        return todo;
+      })
+    );
+  };
+
   useEffect(() => {
     localStorage.setItem("@todos-app:todos", JSON.stringify(todos));
   }, [todos]);
@@ -38,7 +49,12 @@ export default function App() {
       <h1>Todos</h1>
       <input onKeyPress={addTodo} />
       {todos.map(todo => (
-        <Todo key={todo.id} todo={todo} remove={() => deleteTodo(todo.id)} />
+        <Todo
+          key={todo.id}
+          todo={todo}
+          remove={() => deleteTodo(todo.id)}
+          update={() => updateTodo(todo.id)}
+        />
       ))}
     </div>
   );

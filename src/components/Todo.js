@@ -7,9 +7,10 @@ const styles = {
   }
 };
 
-export default function Todo({ todo, remove }) {
+export default function Todo({ todo, remove, update }) {
   return (
     <div style={styles.container}>
+      <button onClick={update}>U</button>
       <p>{todo.text}</p>
       <button onClick={remove}>X</button>
     </div>
