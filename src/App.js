@@ -38,6 +38,9 @@ export default function App() {
 
   const deleteTodo = id => setTodos(todos.filter(todo => todo.id !== id));
 
+  const deleteDoneTodos = () =>
+    setTodos(todos.filter(todo => todo.active !== false));
+
   const updateTodo = id => {
     setTodos(
       todos.map(todo => {
@@ -79,6 +82,7 @@ export default function App() {
       <button onClick={() => setFilter("all")}>Todos</button>
       <button onClick={() => setFilter("notdone")}>Ativos</button>
       <button onClick={() => setFilter("done")}>Completos</button>
+      <button onClick={() => deleteDoneTodos()}>Remover Completos</button>
     </div>
   );
 }
