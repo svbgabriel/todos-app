@@ -32,6 +32,10 @@ export default function App() {
     }
   }, [filter, todos]);
 
+  const notDoneCount = useMemo(() => {
+    return todos.filter(todo => todo.active !== false).length;
+  }, [todos]);
+
   const deleteTodo = id => setTodos(todos.filter(todo => todo.id !== id));
 
   const updateTodo = id => {
@@ -71,6 +75,7 @@ export default function App() {
           update={() => updateTodo(todo.id)}
         />
       ))}
+      <p>{`Faltam ${notDoneCount} tarefas`}</p>
       <button onClick={() => setFilter("all")}>Todos</button>
       <button onClick={() => setFilter("notdone")}>Ativos</button>
       <button onClick={() => setFilter("done")}>Completos</button>
