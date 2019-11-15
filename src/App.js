@@ -35,12 +35,13 @@ export default function App() {
     localStorage.setItem("@todos-app:todos", JSON.stringify(todos));
   }, [todos]);
 
-  async function addTodo(event) {
+  function addTodo(event) {
     if (event.key === "Enter") {
       setTodos([
         ...todos,
         { id: Math.random(), text: event.target.value, active: true }
       ]);
+      event.target.value = "";
     }
   }
 
