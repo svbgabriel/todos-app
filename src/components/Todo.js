@@ -1,20 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Todo({ title }) {
+const styles = {
+  container: {
+    display: "flex"
+  }
+};
+
+export default function Todo({ todo, remove }) {
   return (
-    <div>
-      <h1>{title}</h1>
+    <div style={styles.container}>
+      <p>{todo.text}</p>
+      <button onClick={remove}>X</button>
     </div>
   );
 }
 
-Todo.defaultProps = {
-  title: "Todo padrão"
-};
-
 Todo.propTypes = {
-  title: PropTypes.string
+  todo: PropTypes.shape({
+    text: PropTypes.string.isRequired
+  }).isRequired
 };
-
-export default Todo;

@@ -18,13 +18,18 @@ export default function App() {
 
   const [todos, setTodos] = useState(getTodos);
 
+  const deleteTodo = id => setTodos(todos.filter(todo => todo.id !== id));
+
   useEffect(() => {
     localStorage.setItem("@todos-app:todos", JSON.stringify(todos));
   }, [todos]);
 
   async function addTodo(event) {
     if (event.key === "Enter") {
-      setTodos([...todos, { id: Math.random(), text: event.target.value }]);
+      setTodos([
+        ...todos,
+        { id: Math.random(), text: event.target.value, active: true }
+      ]);
     }
   }
 
@@ -33,7 +38,7 @@ export default function App() {
       <h1>Todos</h1>
       <input onKeyPress={addTodo} />
       {todos.map(todo => (
-        <Todo key={todo.id} title={todo.text} />
+        <Todo key={todo.id} todo={todo} remove={() => deleteTodo(todo.id)} />
       ))}
     </div>
   );
