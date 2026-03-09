@@ -10,18 +10,32 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    margin: "50px auto",
-    fontFamily: "Arial, sans-serif"
+    padding: "20px",
+    minHeight: "100vh",
+    fontFamily: "Arial, sans-serif",
+    boxSizing: "border-box"
   } as CSSProperties,
   containerTodos: {
+    display: "flex",
+    flexDirection: "column",
     background: "#fff",
-    minWidth: "350px",
+    width: "100%",
     maxWidth: "500px",
-    padding: "10px",
-    boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)"
+    height: "70vh",
+    minHeight: "400px",
+    maxHeight: "800px",
+    padding: "15px",
+    boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)",
+    boxSizing: "border-box"
   } as CSSProperties,
   header: {
-    width: "100%"
+    width: "100%",
+    flexShrink: 0
+  } as CSSProperties,
+  main: {
+    flex: 1,
+    overflowY: "auto",
+    overflowX: "hidden"
   } as CSSProperties,
   footer: {
     display: "flex",
@@ -29,7 +43,8 @@ const styles = {
     alignItems: "center",
     marginTop: "10px",
     fontSize: "14px",
-    color: "#777"
+    color: "#777",
+    flexShrink: 0
   } as CSSProperties,
   containerButtons: {
     display: "flex",
@@ -42,18 +57,21 @@ const styles = {
     width: "100%",
     padding: "16px",
     boxSizing: "border-box",
-    outlineWidth: "0"
+    outlineWidth: "0",
+    flexShrink: 0
   } as CSSProperties,
   separator: {
     height: "1px",
-    background: "#ededed"
+    background: "#ededed",
+    flexShrink: 0
   } as CSSProperties,
   title: {
     fontSize: "80px",
     fontWeight: "100",
     textAlign: "center",
     color: "rgba(175, 47, 47, 0.15)",
-    margin: "0"
+    margin: "0",
+    flexShrink: 0
   } as CSSProperties,
   removeButton: {
     border: "0",
@@ -144,7 +162,7 @@ export default function App() {
           />
         </header>
         <div style={styles.separator} />
-        <main>
+        <main style={styles.main}>
           {filteredTodos.map(todo => (
             <Todo
               key={todo.id}
